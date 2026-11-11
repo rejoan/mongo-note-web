@@ -26,6 +26,17 @@ export function AuthProvider({ children }) {
     }
   }, [token, user])
 
+  useEffect(() => {
+    function handleUnauthorized() {
+      setToken(null)
+      setUser(null)
+    }
+
+    window.addEventListener('mongo-note:unauthorized', handleUnauthorized)
+
+    return () => window.removeEventListener('mongo-note:unauthorized', handleUnauthorized)
+  }, [])
+
   async function signIn(email, password) {
     const data = await api('/auth/login', {
       method: 'POST',

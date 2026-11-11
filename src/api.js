@@ -1,4 +1,4 @@
-const API_URL = (import.meta.env.VITE_API_URL || 'https://mongo-note.test/api').replace(/\/$/, '')
+const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:8000/api').replace(/\/$/, '')
 
 export class ApiError extends Error {
   constructor(message, status, errors) {
@@ -36,6 +36,11 @@ export async function api(path, { method = 'GET', body, token } = {}) {
     payload = await response.json()
   } catch {
     payload = null
+  }
+
+  if (response.status === 401) {
+    // A stored token can become invalid (expired, or the API secret changed).
+    window.dispatchEvent(new Event('mongo-note:unauthorized'))
   }
 
   if (!response.ok) {

@@ -1,12 +1,12 @@
 # Mongo Note — Web Client
 
-React + Vite client for the [Mongo Note API](../mongo-note). It covers the full task: authentication, note CRUD, the public posts feed, per-user posts, admin user management, the admin all-notes view, and the grouped-by-interests report.
+React + Vite client for the [Mongo Note API](../mongo-note), a Node/Express + Mongoose service. It covers the full task: authentication, note CRUD, the public posts feed, per-user posts, admin user management, the admin all-notes view, and the grouped-by-interests report.
 
 ## Requirements
 
 - **Node.js 20.19+**, 22.12+ or 24.x (Vite 8 requirement; developed on Node 24)
 - npm 10+
-- A running Mongo Note API (see the backend README)
+- A running Mongo Note API (Node/Express + Mongoose; see the backend README), seeded with the demo accounts
 
 ## Setup
 
@@ -20,16 +20,12 @@ cp .env.example .env
 `.env`:
 
 ```dotenv
-VITE_API_URL=https://mongo-note.test/api
+VITE_API_URL=http://localhost:8000/api
 ```
 
-If `VITE_API_URL` is omitted, the client defaults to `https://mongo-note.test/api`. For `php artisan serve`, use:
+If `VITE_API_URL` is omitted, the client defaults to `http://localhost:8000/api`.
 
-```dotenv
-VITE_API_URL=http://127.0.0.1:8000/api
-```
-
-Make sure the API's `CORS_ALLOWED_ORIGINS` includes this app's origin (default dev origin: `http://localhost:5173`).
+Make sure the API's `CORS_ALLOWED_ORIGINS` includes this app's origin (the default is `http://localhost:5173,http://127.0.0.1:5173`).
 
 ## Run
 
